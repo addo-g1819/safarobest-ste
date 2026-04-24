@@ -72,7 +72,7 @@ const inventoryFeedback = document.getElementById("inventoryFeedback");
 const seedDemoBtn = document.getElementById("seedDemoBtn");
 const clearDataBtn = document.getElementById("clearDataBtn");
 
-const demoPassword = "safarobest-admin";
+const demoPassword = "#AlmightY";
 
 const getInventory = () => {
   const raw = window.localStorage.getItem(storageKeys.inventory);

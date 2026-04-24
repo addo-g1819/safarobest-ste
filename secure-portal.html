@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Safarobest Admin | WASSCE and BECE Inventory</title>
+    <meta
+      name="description"
+      content="Safarobest admin page for managing WASSCE and BECE checker PIN inventory, stock counts, and fulfilled orders."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">SB</span>
+          <span class="brand-copy">
+            <strong>Safarobest</strong>
+            <small>WASSCE and BECE admin console</small>
+          </span>
+        </a>
+
+        <nav class="nav">
+          <a href="index.html">Storefront</a>
+          <a href="#admin">Admin tools</a>
+          <a href="#orders">Orders</a>
+        </nav>
+
+        <a class="nav-cta" href="index.html">View site</a>
+      </header>
+
+      <main>
+        <section class="hero admin-hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Safarobest admin</p>
+            <h1>Manage WASSCE and BECE checker inventory and automatic delivery in one place.</h1>
+            <p class="hero-text">
+              Upload new WASSCE and BECE checker PINs, monitor available stock, and review recent
+              orders from this separate admin page.
+            </p>
+          </div>
+
+          <div class="hero-card">
+            <div class="glass-panel">
+              <div class="status-row">
+                <span class="dot"></span>
+                <span>Admin dashboard ready</span>
+              </div>
+
+              <div class="stats-grid">
+                <article>
+                  <strong id="heroAvailablePins">0</strong>
+                  <span>Available checker PINs</span>
+                </article>
+                <article>
+                  <strong id="heroDeliveredPins">0</strong>
+                  <span>Pins delivered</span>
+                </article>
+                <article>
+                  <strong id="ordersTotal">0</strong>
+                  <span>Total orders</span>
+                </article>
+                <article>
+                  <strong>Local</strong>
+                  <span>Browser storage mode</span>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="admin-section" id="admin">
+          <div class="section-heading">
+            <p class="eyebrow">Admin console</p>
+            <h2>Manage WASSCE and BECE checker inventory and monitor auto-delivery.</h2>
+          </div>
+
+          <div class="admin-grid">
+            <article class="admin-card">
+              <div class="card-head">
+                <div>
+                  <h3>Admin access</h3>
+                  <p>Current password: <code>#AlmightY</code></p>
+                </div>
+                <span class="status-pill" id="adminStatus">Locked</span>
+              </div>
+
+              <form class="admin-form" id="adminLoginForm">
+                <label>
+                  Password
+                  <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Enter admin password"
+                    required
+                  />
+                </label>
+                <div class="inline-actions">
+                  <button class="primary-btn" type="submit">Unlock admin</button>
+                  <button class="secondary-btn" type="button" id="adminLogoutBtn">Lock</button>
+                </div>
+                <p class="helper-text" id="adminFeedback" aria-live="polite"></p>
+              </form>
+            </article>
+
+            <article class="admin-card">
+              <div class="card-head">
+                <div>
+                  <h3>Inventory summary</h3>
+                  <p>Live stock overview from your browser database.</p>
+                </div>
+              </div>
+
+              <div class="inventory-stats">
+                <div>
+                  <strong id="stockAvailable">0</strong>
+                  <span>Available</span>
+                </div>
+                <div>
+                  <strong id="stockSold">0</strong>
+                  <span>Delivered</span>
+                </div>
+                <div>
+                  <strong id="stockOrdersTotal">0</strong>
+                  <span>Total orders</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="admin-grid admin-tools locked-panel" id="adminTools">
+            <article class="admin-card">
+              <div class="card-head">
+                <div>
+                  <h3>Upload checker PINs</h3>
+                  <p>Use one line per WASSCE or BECE checker in either <code>SERIAL|PIN</code> or <code>PIN</code> format.</p>
+                </div>
+              </div>
+
+              <form class="admin-form" id="inventoryForm">
+                <label>
+                  Checker list
+                  <textarea
+                    id="inventoryInput"
+                    rows="8"
+                    placeholder="SB-0001|123456789012&#10;SB-0002|123456789013&#10;123456789014"
+                    required
+                  ></textarea>
+                </label>
+
+                <div class="inline-actions">
+                  <button class="primary-btn" type="submit">Add to inventory</button>
+                  <button class="secondary-btn" type="button" id="seedDemoBtn">Load demo stock</button>
+                  <button class="secondary-btn danger-btn" type="button" id="clearDataBtn">Clear all data</button>
+                </div>
+                <p class="helper-text" id="inventoryFeedback" aria-live="polite"></p>
+              </form>
+            </article>
+
+            <article class="admin-card">
+              <div class="card-head">
+                <div>
+                  <h3>Recent inventory</h3>
+                  <p>The newest WASSCE and BECE checker PINs you uploaded.</p>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Serial</th>
+                      <th>PIN</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="inventoryTableBody"></tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="admin-card span-two" id="orders">
+              <div class="card-head">
+                <div>
+                  <h3>Recent orders</h3>
+                  <p>Newest customer orders and the pins assigned to them.</p>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Customer</th>
+                      <th>Plan</th>
+                      <th>Qty</th>
+                      <th>Delivery</th>
+                      <th>Assigned PINs</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ordersTableBody"></tbody>
+                </table>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
